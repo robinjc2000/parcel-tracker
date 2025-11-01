@@ -35,3 +35,84 @@
             outline: none;
         }
 
+        input[type="text"]:focus {
+            border-color: #0073e6;
+        }
+
+        /* Track Button */
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            background-color: #0073e6; /* Blue button */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Link to aggregator */
+        .redirect-link {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #004080;
+            text-decoration: none;
+        }
+
+        .redirect-link:hover {
+            color: #0073e6;
+        }
+
+        /* Footer note */
+        .note {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #004080;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Asorte.in</h1>
+
+    <input type="text" id="trackingNumber" placeholder="Enter your AWS / Tracking Number">
+    <button onclick="trackParcel()">Track Now</button>
+
+    <div id="redirectDiv"></div>
+
+    <script>
+        function trackParcel() {
+            const trackingNumber = document.getElementById('trackingNumber').value.trim();
+            if (!trackingNumber) {
+                alert("Please enter a tracking number!");
+                return;
+            }
+
+            let aggregatorUrl = '';
+
+            // Simple logic based on tracking number prefix
+            if (trackingNumber.startsWith('1Z')) {
+                aggregatorUrl = `https://www.ups.com/track?tracknum=${trackingNumber}`;
+            } else if (/^TBA|^940|^920/.test(trackingNumber)) {
+                aggregatorUrl = `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+            } else if (/^\d{13}$/.test(trackingNumber)) {
+                aggregatorUrl = `https://www.17track.net/en#nums=${trackingNumber}`;
+            } else {
+                aggregatorUrl = `https://www.aftership.com/trackings/${trackingNumber}`;
+            }
+
+            // Show redirect link
+            document.getElementById('redirectDiv').innerHTML = `
+                <a class="redirect-link" href="${aggregatorUrl}" target="_blank">
+                    See your updates / tracking info here
+                </a>
+            `;
+        }
+    </script>
+
+</body>
+</html>
+
