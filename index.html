@@ -9,79 +9,105 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #e6f2ff; /* Light blue background */
+            background-color: #0096FF; /* Blue theme */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            color: white;
         }
 
         /* Header */
         h1 {
-            color: #004080; /* Darker blue for the title */
             margin-bottom: 40px;
             font-size: 3em;
         }
 
-        /* Search Box */
+        /* Search Box and Button Container */
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         input[type="text"] {
-            width: 300px;
+            width: 400px;
             padding: 15px;
             font-size: 1em;
-            border-radius: 8px;
-            border: 2px solid #004080;
-            margin-bottom: 20px;
+            border-radius: 8px 0 0 8px;
+            border: none;
             outline: none;
+            color: black; /* input text color */
         }
 
-        input[type="text"]:focus {
-            border-color: #0073e6;
-        }
-
-        /* Track Button */
         button {
-            padding: 12px 30px;
+            padding: 15px 25px;
             font-size: 1em;
-            background-color: #0073e6; /* Blue button */
+            background-color: #004080; /* darker blue button */
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 0 8px 8px 0;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #005bb5;
+            background-color: #00264d;
         }
 
-        /* Link to aggregator */
+        /* Redirect link */
         .redirect-link {
             margin-top: 20px;
             font-weight: bold;
-            color: #004080;
+            color: #FFFF8F;
             text-decoration: none;
+            font-size: 1.1em;
         }
 
         .redirect-link:hover {
-            color: #0073e6;
+            color: #FFF700;
         }
 
-        /* Footer note */
-        .note {
-            margin-top: 30px;
+        /* Marquee / Legal notice */
+        .notice {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.2);
+            color: white;
+            padding: 10px 0;
             font-size: 0.9em;
-            color: #004080;
         }
+
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
     </style>
 </head>
 <body>
 
     <h1>Asorte.in</h1>
 
-    <input type="text" id="trackingNumber" placeholder="Enter your AWS / Tracking Number">
-    <button onclick="trackParcel()">Track Now</button>
+    <div class="search-container">
+        <input type="text" id="trackingNumber" placeholder="Enter your AWS / Tracking Number">
+        <button onclick="trackParcel()">Track Now</button>
+    </div>
 
     <div id="redirectDiv"></div>
+
+    <div class="notice">
+        <div class="marquee">
+            We do not collect or store any personal data. All tracking requests redirect to official courier partners or external aggregator platforms.
+        </div>
+    </div>
 
     <script>
         function trackParcel() {
