@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asorte.in</title>
+    <title>Know Your Parcel</title>
     <style>
         /* General Styles */
         body {
@@ -16,23 +16,29 @@
             height: 100vh;
             flex-direction: column;
             color: white;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         /* Header */
         h1 {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             font-size: 3em;
+            text-align: center;
         }
 
         /* Search Box and Button Container */
         .search-container {
             display: flex;
             align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* allow wrapping on small screens */
             margin-bottom: 20px;
         }
 
         input[type="text"] {
             width: 400px;
+            max-width: 100%;
             padding: 15px;
             font-size: 1em;
             border-radius: 8px 0 0 8px;
@@ -49,6 +55,7 @@
             border: none;
             border-radius: 0 8px 8px 0;
             cursor: pointer;
+            margin-top: 0;
         }
 
         button:hover {
@@ -62,6 +69,7 @@
             color: #FFFF8F;
             text-decoration: none;
             font-size: 1.1em;
+            word-wrap: break-word;
         }
 
         .redirect-link:hover {
@@ -90,11 +98,35 @@
             100% { transform: translateX(-100%); }
         }
 
+        /* Responsive design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .search-container {
+                flex-direction: column; /* stack input and button */
+            }
+
+            input[type="text"] {
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            button {
+                border-radius: 8px;
+                width: 100%;
+            }
+
+            .redirect-link {
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Asorte.in</h1>
+    <h1>Know Your Parcel</h1>
 
     <div class="search-container">
         <input type="text" id="trackingNumber" placeholder="Enter your AWS / Tracking Number">
@@ -141,4 +173,3 @@
 
 </body>
 </html>
-
